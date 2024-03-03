@@ -1,0 +1,16 @@
+Package: fluxus
+Type: Package
+Title: Análise e elaboração de fluxos atuariais dos RPPS
+Version: 0.1.0
+Author: Marcos F Silva
+Maintainer: Marcos F Silva <marcosfs2006@gmail.com>
+Description: O pacote tem por objetivo oferecer um conjunto de
+    de funções que facilitem a análise de fluxos atuarisis dos
+    Regimes Próprios de Previdência Social - RPPS, bem como
+    sua elaboração.
+License: 
+Encoding: UTF-8
+LazyData: true
+Imports:
+    tidyverse,
+    writexl
