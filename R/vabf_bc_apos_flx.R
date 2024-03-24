@@ -3,10 +3,10 @@
 ### função para o cálculo do VABF_BC
 ###---------------------------------
 
-vabf_bc <- function(Bx,
+vabf_bc_apos <- function(Bx,
                     inflacao = 0,
                     i,
-                    cb,
+                    cb=0,
                     idade,
                     invalidez=NULL,
                     regra,

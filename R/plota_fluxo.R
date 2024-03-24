@@ -1,5 +1,5 @@
 
-library(tidyverse)
+#library(tidyverse)
 
 plota_fluxo <- function(fluxo, tipo="rm"){
 
@@ -25,7 +25,8 @@ plota_fluxo <- function(fluxo, tipo="rm"){
            ag       = V290001,
 
            ra       = ag - rm) %>%
-   select(-starts_with("V"))
+   select(-matches("^V\\d{6}"))
+
 
 # elabora o gráfico
 ggplot(qtd_atuarial, aes(x = ano, y = .data[[tipo]])) +
