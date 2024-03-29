@@ -1,12 +1,18 @@
-
-#library(tidyverse)
-
+#' Elabora gráfico do fluxo atuarial da quantidade atuarial desejada.
+#'
+#' @param fluxo `data frame` contendo o fluxo atuarial
+#' @param tipo quantidade atuarial cujo fluxo se deseja plotar. Opção _default_ `rm` (reserva matemática)
+#'
+#' @return Gráfico de linha com a evolução da quantidade atuarial especificada.
+#' @export
+#' @importFrom rlang .data
+#' 
 plota_fluxo <- function(fluxo, tipo="rm"){
 
 
 # prepara a base de dados
  qtd_atuarial <- fluxo %>%
-   mutate( ano  = V100201,
+   dplyr::mutate( ano  = V100201,
            vasf = V109001,
 
            vabf     = V210000 + V220000,
@@ -25,17 +31,17 @@ plota_fluxo <- function(fluxo, tipo="rm"){
            ag       = V290001,
 
            ra       = ag - rm) %>%
-   select(-matches("^V\\d{6}"))
+   dplyr::select(-tidyselect::matches("^V\\d{6}"))
 
 
 # elabora o gráfico
-ggplot(qtd_atuarial, aes(x = ano, y = .data[[tipo]])) +
-  geom_point(size=2, color="blue") +
-  geom_line(color="blue") +
-  labs(title = str_c("Evolução da quantidade ", tipo),
+ggplot2::ggplot(qtd_atuarial, ggplot2::aes(x = ano, y = .data[[tipo]])) +
+  ggplot2::geom_point(size=2, color="blue") +
+  ggplot2::geom_line(color="blue") +
+  ggplot2::labs(title = stringr::str_c("Evolucao da quantidade ", tipo),
        y = "",
        x = "") +
-  theme_bw()
+  ggplot2::theme_bw()
 
 }
 

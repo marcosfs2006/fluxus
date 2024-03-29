@@ -1,17 +1,26 @@
-
-
+#' Importa o fluxo atuarial
+#' 
+#' A função importa os fluxos atuariais no formato `.csv`
+#' conforme encaminhados ao Ministério da Previdência Social - MPS
+#' no modelo disponibilizado.
+#'
+#' @param arquivo Arquivo contendo o fluxo atuarial no formato `.csv`
+#'
+#' @return `data frame` contendo o fluxo atuarial
+#' 
+#' @export
+#'
+#' 
 importa_fluxo <- function(arquivo){
 
-  if(!require(tidyverse)) stop("Favor instalar o pacote tidyverse.")
-
-  fluxo <- read_csv2(arquivo,
-                     skip = 5,
-                     col_names = FALSE,
-                     show_col_types = FALSE,
-                     n_max = 150,
-                     locale=locale(decimal_mark = ",",
-                                   grouping_mark = "."),
-                     col_types = cols())
+  fluxo <- readr::read_csv2(arquivo,
+                            skip = 5,
+                            col_names = FALSE,
+                            show_col_types = FALSE,
+                            n_max = 150,
+                            locale=readr::locale(decimal_mark = ",",
+                                                 grouping_mark = "."),
+                            col_types = readr::cols())
 
   colfluxo <- c(100101, 100201, 100301, 100401, 109001, 111000, 111101, 111201, 111301,
                 111401, 112000, 119900, 121000, 121100, 121200, 121300, 121400, 121500,
@@ -26,7 +35,7 @@ importa_fluxo <- function(arquivo){
     names(fluxo) <- paste("V", colfluxo, sep="")
 
     fluxo %>%
-      mutate(
+      dplyr::mutate(
         # Recálculo de algumas variáveis.
         V111000 = V111101 + V111201 + V111301 + V111401,
         V121000 = V121100 + V121200 + V121300 + V121400 + V121500 + V121600 + V121700,

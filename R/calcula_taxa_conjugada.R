@@ -1,10 +1,19 @@
-calcula_taxa_conjugada <- function(tx_juros, tx_incremento){
+#' Calcula taxa conjugada
+#'
+#' @param juros Taxa de juros. Valor numérico em formato percentual.
+#' @param incremento Taxa de crescimento dos salários ou benefícios. Valor numérico em formato percentual.
+#'
+#' @return Valor da taxa conjugada.
+#' @export
+#'
+#' @examples
+#' calcula_taxa_conjugada(juros=4.5, incremento=2.5)
+#' 
+calcula_taxa_conjugada <- function(juros, incremento){
+
+  juros <- juros / 100
+  incremento <- incremento / 100
   
-  # combina a taxa de juros com a taxa de crescimento do benefício (ou salário??? no caso de VABF BaC)
-  
-  tx_juros <- tx_juros / 100
-  tx_incremento <- tx_incremento / 100
-  
-  ((1 + tx_juros) / (1 + tx_incremento)) - 1
+  ((1 + juros) / (1 + incremento)) - 1
   
 }

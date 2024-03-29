@@ -1,29 +1,33 @@
-
-# Função para calcular a px multidecremental considerando até 4 decrementos
-
+#' Calcula probabilidades multidecrementais
+#'
+#' Esta função calcula vetores de probabilidade considerando
+#' dois ou mais decrementos. 
+#'
+#'@details
+#' Devem ser informados, no mínimo, os decrementos de morte e invalidez. 
+#' Se forem declarados três decrementos estes serão considerados morte, invalidez e rotatividade.
+#'
+#'
+#' @param qx Vetor númerico contendo as probabilidades de morte. Argumento obrigatório.
+#' @param ix Vetor numérico contendo as probabilidades de entrada em invalidez. Argumento obrigatório.
+#' @param tx Vetor numérico contendo as probabilidades de saída do plano de benefícios (rotatividade/turnover).
+#' @param rx Vetor numérico contendo as probabilidades de aposentadoria antecipada (retirement).
+#' @param retorno String informando se devem ser retornadas as probabilidades multidecrementais de morte (`pxT`)
+#' ou de sobrevivência (`pxT`)
+#'
+#' @return Um vetor númerico contendo as probabilidades multidecrementais.
+#' @export
+#'
+#'                         
 calcula_multidecremento <- function(qx=NULL, ix=NULL, tx=NULL, rx=NULL, retorno=c("qxT", "pxT")) { 
-  
-  # qx - probabilidade de morte
-  # ix - probabilidade de invalidar
-  # tx - probabilidade de sair do plano de benefícios (turnover)
-  # rx - probabilidade de se aposentar antes do previsto (retirement)
-  
-  # usualmente utiliza-se apenas os decrementos morte e invalidez
-  
-  # premissas: deve existir obrigatoriamente no mínimo os decrementos de  mortalidade e invalidez
-  #            se existir três decrementos serão sempre mortalidade, invalidez e rotação
-  #            
-  
-  # usei as fórmulas apresentads em José Angelo.
-  # e considerei também o capítulo 4 de Daniel Wedan
-  
+
   teste_qx <- is.null(qx)
   teste_ix <- is.null(ix)
   teste_tx <- is.null(tx)
   teste_rx <- is.null(rx)
   
-  if(teste_qx) stop("Decremento mortalidade é obrigatório.")
-  if(teste_ix) stop("O decremento de invalidez também.")
+  if(teste_qx) stop("Decremento mortalidade e obrigatorio.")
+  if(teste_ix) stop("O decremento de invalidez tambem.")
   
   
   if(all(c(teste_tx, teste_rx))) {  # se ambos são nulos é bi 
