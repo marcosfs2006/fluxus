@@ -1,3 +1,5 @@
+#' @import lifecontingencies
+#' 
 #' @importFrom utils globalVariables
 #'
 utils::globalVariables(c("V111000", "V111101", "V111201", "V111301", "V111401", "V121000", "V121100",

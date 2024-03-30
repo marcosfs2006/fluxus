@@ -60,17 +60,29 @@ vacf_bc_apos <- function(Cx,
   
   
   # criar a tábua de mortalidade de invalidos (tmi), caso necessário
-  if(!is.null(tmi)){
+  if(!is.null(invalidez)){
     
-    ix_msc <- cria_tabua(tmi[stringr::str_detect(tmi, "M")]) %>%
-      cria_comutacao(juros = juros)
+    if(stringr::str_detect(tmi, "(M|F)$")){
+      
+      ix_msc <- cria_tabua(tmi[stringr::str_detect(tmi, "M")]) %>%
+        cria_comutacao(juros = juros)
+      
+      ix_fem <- cria_tabua(tmi[stringr::str_detect(tmi, "F")]) %>%
+        cria_comutacao(juros = juros)
+      
+    } else {
+      
+      # Para o caso de ser uma tábua única para homens e mulheres
+      ix_msc <- ix_fem <- cria_tabua(tmi) %>%
+        cria_comutacao(juros = juros)
+      
+    }
     
-    ix_fem <- cria_tabua(tmi[stringr::str_detect(tmi, "F")]) %>%
-      cria_comutacao(juros = juros)  
   } else {
     
     ix_msc <- NULL
     ix_fem <- NULL
+    
   }
   
   Ex <- purrr::map(flx, \(x) get_Ex(id=x,
