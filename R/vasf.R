@@ -27,7 +27,9 @@ vasf <- function(Sx,
                  tmdm,
                  tmdf,
                  flx=1:150){
-
+  
+   #cs <- cs / 100 
+  
   # calcula 150 colunas contendo os valores de pxt
   pxT <- purrr::map(flx, \(x) get_pxT(id=x,
                                       idade = idade,
@@ -48,7 +50,7 @@ vasf <- function(Sx,
                   idade_prev_apos = idade_prev_apos,
                   Sx = Sx) %>%
     dplyr::relocate(id, Sx, idade, idade_prev_apos) %>%
-    dplyr::mutate(dplyr::across(tidyselect::starts_with("ano"), \(x) calcula_Sproj(pxT=x, Sx=Sx, cs=0.01, t=(expoente[[dplyr::cur_column()]]))),
+    dplyr::mutate(dplyr::across(tidyselect::starts_with("ano"), \(x) calcula_Sproj(pxT=x, Sx=Sx, cs=cs, t=(expoente[[dplyr::cur_column()]]))),
                   dplyr::across(tidyselect::starts_with("ano"), \(x) dplyr::if_else((idade_prev_apos - (expoente[[dplyr::cur_column()]] + idade)) <= 0, 0, x))) %>% # essa parte é só para 'aparar' o fluxo...
     dplyr::select(id, tidyselect::starts_with("ano"))
   

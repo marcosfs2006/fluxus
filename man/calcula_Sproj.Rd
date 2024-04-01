@@ -9,11 +9,11 @@ calcula_Sproj(pxT, Sx, cs, t)
 \arguments{
 \item{pxT}{Probabilidades de sobrevivência multidecremental. Vetor numérico.}
 
-\item{Sx}{Salário de contribuição do servidor na data focal da avaliação atuarial.}
+\item{Sx}{Salário de contribuição mensal do servidor na data focal da avaliação atuarial.}
 
-\item{cs}{Taxa real de crescimento salarial. Vetor numérico.}
+\item{cs}{Taxa real de crescimento anual salarial. Vetor numérico.}
 
-\item{t}{Tempo de diferimento da projeção.}
+\item{t}{Tempo de diferimento da projeção (em anos).}
 }
 \value{
 Salários projetados para o período t

@@ -17,11 +17,11 @@ calcula_multidecremento(
 
 \item{ix}{Vetor numérico contendo as probabilidades de entrada em invalidez. Argumento obrigatório.}
 
-\item{tx}{Vetor numérico contendo as probabilidades de saída do plano de benefícios (rotatividade/turnover).}
+\item{tx}{Vetor numérico contendo as probabilidades de saída do plano de benefícios (turnover/rotatividade).}
 
 \item{rx}{Vetor numérico contendo as probabilidades de aposentadoria antecipada (retirement).}
 
-\item{retorno}{String informando se devem ser retornadas as probabilidades multidecrementais de morte (`pxT`)
+\item{retorno}{String informando se devem ser retornadas as probabilidades multidecrementais de morte (`qxT`)
 ou de sobrevivência (`pxT`)}
 }
 \value{
