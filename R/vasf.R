@@ -20,8 +20,8 @@
 #'
 #' 
 vasf <- function(Sx,
-                 idade,
-                 idade_prev_apos,
+                 idade,           # idade_x
+                 idade_prev_apos, # idade_r
                  sexo,
                  cs,
                  tmdm,

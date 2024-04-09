@@ -25,11 +25,6 @@
 #' 
 get_Ex <- function(id, idade, sexo, invalidez, tqm, tqf, tim, tif){
   
-  # todo: 
-  # 2 - caso não haja indicador de invalidez nos dados???? 
-  #     possivel solução: criar na base cadastral uma coluna (status_validez) com a indicação de que todos os aposentados são válidos.
-  #     com isso não é preciso mexer na função como fiz.
-  
 
   if(is.null(invalidez)){ # caso onde não exista na base cadastral uma coluna de status de invalidez.
     
@@ -45,7 +40,7 @@ get_Ex <- function(id, idade, sexo, invalidez, tqm, tqf, tim, tif){
                                           (invalidez == "V" & sexo == "M") ~ purrr::map_dbl(idade, \(k) lifecontingencies::Exn(tqm, x = k, n = id)),
                                           (invalidez == "I" & sexo == "F") ~ purrr::map_dbl(idade, \(k) lifecontingencies::Exn(tif, x = k, n = id)),
                                           (invalidez == "I" & sexo == "M") ~ purrr::map_dbl(idade, \(k) lifecontingencies::Exn(tim, x = k, n = id)))) %>% 
-    dplyr::select(Ex) 
+       dplyr::select(Ex) 
   }
 
   Ex # retorna o Ex
